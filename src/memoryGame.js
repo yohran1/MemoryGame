@@ -13,12 +13,36 @@ export default function MemoryGame(){
     }, [])
 
     function restart(){
+        game.clear_cards()
+        setCards(game.create_cards_tecnologia())
         setGameOver(false)
+    }
+
+    function mudancaFlip(card){
+        if(game.setCard(card.id)){
+
+            if(game.segunda_carta){
+                if(game.checkMath()){
+                    game.clear_cards()
+                    if(game.checkGameOver()){
+                        // Game Over
+                        setGameOver(true)
+                    }
+                }else{
+                    setTimeout(()=>{
+                        // Não houve match
+                        game.cartas_nao_viradas()
+                        setCards([...game.cards])
+                    },1000)
+                }
+            }
+        }
+        setCards([...game.cards])
     }
 
     return (
         <div>
-            <GameTabuleiro cards={cards}></GameTabuleiro>
+            <GameTabuleiro mudancaFlip={mudancaFlip} cards={cards}></GameTabuleiro>
             <GameOver mostrar={gameOver} onRestart={restart}></GameOver>
         </div>
     )

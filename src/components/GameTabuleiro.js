@@ -5,7 +5,7 @@ export default function GameTabuleiro(props){
     return (
         <div id="game_tela">
             {props.cards.map((card, index)=>
-                <CardElements key={index} card={card}></CardElements>
+                <CardElements mudancaFlip={props.mudancaFlip} key={index} card={card}></CardElements>
             )}
         </div>
     )

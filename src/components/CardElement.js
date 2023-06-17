@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CardElements(props){
     return (
-        <div id={props.card.id} className="card">
+        <div onClick={()=> {props.mudancaFlip(props.card)}} id={props.card.id} className={`card ${props.card.flipped? "flip" : ""}`}>
             <div className="card_front">
                 <img className="icon" 
                  src={`assets/img/${props.card.icon}.png`}
