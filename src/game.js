@@ -105,6 +105,26 @@ let game = {
     
             [this.cards[index_randomico], this.cards[index_atual]] = [this.cards[index_atual], this.cards[index_randomico]]
         }
+    }, 
+    flipCard: function(cardID, gameOver_callBack, noMath_callBack){
+        if(this.setCard(cardID)){
+
+            if(this.segunda_carta){
+                if(this.checkMath()){
+                    this.clear_cards()
+                    if(this.checkGameOver()){
+                        // Game Over
+                        gameOver_callBack()
+                    }
+                }else{
+                    setTimeout(()=>{
+                        // Não houve match
+                        this.cartas_nao_viradas()
+                        noMath_callBack()
+                    },1000)
+                }
+            }
+        }
     }
 }
 export default game

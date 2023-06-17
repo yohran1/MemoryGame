@@ -19,24 +19,14 @@ export default function MemoryGame(){
     }
 
     function mudancaFlip(card){
-        if(game.setCard(card.id)){
+        game.flipCard(card.id, ()=> {
+            //GameOverCallBack
+            setGameOver(true)
+        },()=>{
+            //noMathCallBack
+            setCards([...game.cards])
 
-            if(game.segunda_carta){
-                if(game.checkMath()){
-                    game.clear_cards()
-                    if(game.checkGameOver()){
-                        // Game Over
-                        setGameOver(true)
-                    }
-                }else{
-                    setTimeout(()=>{
-                        // Não houve match
-                        game.cartas_nao_viradas()
-                        setCards([...game.cards])
-                    },1000)
-                }
-            }
-        }
+        })
         setCards([...game.cards])
     }
 
